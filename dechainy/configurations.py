@@ -119,7 +119,7 @@ class ProbeConfig(Dict):
         egress (str): Code for the egress hook. Default None.
         cp_function (str): The Control plane routine to be periodically executed if needed. Default "".
         cflags (List[str]): List of Cflags to be used while compiling programs. Default [].
-        files (Dict[str, str]): Dictionary containing additional files for the probe. Default {}.
+        extra (Dict[str, any]): Dictionary containing additional configurations. Default None.
         debug (bool): True if the probe must be inserted in debug mode. Default False.
         redirect(str): The name of the interface you want packets to be redirect as default action, else None
         plugin_name (str): The name of the plugin. Default None. (Set by Controller)
@@ -155,11 +155,11 @@ class ProbeConfig(Dict):
         self.egress: str = obj['egress'] if 'egress' in obj else None
         self.cflags: List[str] = obj['cflags'] if 'cflags' in obj else []
         self.cp_function: str = obj['cp_function'] if 'cp_function' in obj else None
-        self.files: Dict[str, str] = obj['files'] if 'files' in obj else None
+        self.extra: Dict[str, any] = obj['extra'] if 'extra' in obj else None
         self.debug: bool = obj['debug'] if 'debug' in obj else False
         self.redirect: bool = obj['redirect'] if 'redirect' in obj else None
         self.log_level: int = DPLogLevel(
-            obj['log_level']) if 'log_level' in obj else DPLogLevel.LOG_INFO.value
+            obj['log_level']).value if 'log_level' in obj else DPLogLevel.LOG_INFO.value
         # Following values are overwritten by Controller
         self.plugin_name: str = obj['plugin'] if 'plugin' in obj else None
         self.name: str = obj['name'] if 'name' in obj else None

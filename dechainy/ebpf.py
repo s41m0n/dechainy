@@ -345,7 +345,7 @@ def get_formatted_code(
         # Substitute the dp_log invocation (length 6 characters) with the right
         # logging function
         code = code[:start] \
-            + f'if ({log_level} >= LOG_LEVEL)' \
+            + f'if ({log_level} <= LOG_LEVEL)' \
             + '{LOG_STRUCT' \
             + code[start + 6:end] \
             + 'log_buffer.perf_submit(ctx, &msg_struct, sizeof(msg_struct));}' \
